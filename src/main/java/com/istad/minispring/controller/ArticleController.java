@@ -103,9 +103,9 @@ public class ArticleController {
 
     @GetMapping("/profile/{id}/{title}")
     public String getProfile(@PathVariable int id ,@PathVariable String title,Model model){
-        model.addAttribute("allPostOfUser",articleService.getArticleByTitle(title));
+        model.addAttribute("allPostOfUser",articleService.getArticleByAuthorName(title));
         model.addAttribute("categories",categoryService.getAllCategory());
-        model.addAttribute("authors",authorService.getAuthorByID(id));
+        model.addAttribute("authors", authorService.getAuthorByID(id));
         return "profile";
     }
 

@@ -1,10 +1,13 @@
 package com.istad.minispring.repository;
 
+import com.istad.minispring.model.Article;
 import com.istad.minispring.model.Author;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Repository
 public class AuthorRepository {
     private List<Author> authors = new ArrayList<>(){

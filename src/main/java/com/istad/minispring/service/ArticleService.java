@@ -5,9 +5,9 @@ import com.istad.minispring.model.Article;
 import java.util.List;
 
 public interface ArticleService {
-    List<Article> getAllArticle();
+    List<Article>getAllArticle();
     Article getArticleByID(int id );
 
     void addNewArticle(Article article);
-    List<Article> getArticleByTitle(String title);
+    List<Article>getArticleByAuthorName(String name);
 }

@@ -21,4 +21,5 @@ public class AuthorServiceImpl implements AuthorService {
     public Author getAuthorByID(int id) {
         return authorRepository.getAuthorByID(id);
     }
+
 }

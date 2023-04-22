@@ -23,11 +23,11 @@ public class ArticleRepository {
     public Article getArticleByID(int id){
         return articleList.stream().filter(e->e.getId()==id).findFirst().orElse(null);
     }
-    public List <Article> getArticleByTitle(String title){
-        return articleList.stream().filter(e-> Objects.equals(e.getAuthor().getName(),title)).toList();
-    }
     public void addNewArticle(Article article){
         articleList.add(article);
     }
 
+    public List<Article> getArticleByAuthorName(String name){
+        return articleList.stream().filter(e-> Objects.equals(e.getAuthor().getName(), name)).toList();
+    }
 }

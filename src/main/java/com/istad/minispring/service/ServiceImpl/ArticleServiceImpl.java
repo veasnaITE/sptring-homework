@@ -12,6 +12,7 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleServiceImpl(){
         articleRepository= new ArticleRepository();
     }
+
     @Override
     public List<Article> getAllArticle() {
         return articleRepository.getAllArticle();
@@ -26,8 +27,10 @@ public class ArticleServiceImpl implements ArticleService {
     public void addNewArticle(Article article) {
         articleRepository.addNewArticle(article);
     }
+
     @Override
-    public List<Article> getArticleByTitle(String title) {
-        return articleRepository.getArticleByTitle(title);
+    public List<Article> getArticleByAuthorName(String name) {
+        return articleRepository.getArticleByAuthorName(name);
     }
+
 }
