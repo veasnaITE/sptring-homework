@@ -5,6 +5,7 @@ import com.istad.minispring.model.articleRequest.ArticleRequest;
 import com.istad.minispring.service.ArticleService;
 import com.istad.minispring.service.AuthorService;
 import com.istad.minispring.service.CategoryService;
+import com.istad.minispring.service.FileUploadService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,13 @@ public class ArticleController {
     ArticleService articleService;
     AuthorService authorService;
     CategoryService categoryService;
+    FileUploadService fileUploadService;
 
-    ArticleController(ArticleService articleService,AuthorService authorService,CategoryService categoryService){
+    ArticleController(ArticleService articleService,AuthorService authorService,CategoryService categoryService,FileUploadService fileUploadService){
         this.articleService=articleService;
         this.authorService= authorService;
         this.categoryService=categoryService;
+        this.fileUploadService=fileUploadService;
     }
     @GetMapping("/index")
     public String index(Model model){
@@ -65,9 +68,6 @@ public class ArticleController {
         newArticle.setAuthor(authorService.getAllAuthors().stream().filter(e->e.getId()==reqArticle.getAuthorID()).findFirst().orElse(null));
 
         newArticle.setCategory(categoryService.getAllCategory().stream().filter(e->e.getId()==reqArticle.getCategoryID()).findFirst().orElse(null));
-
-//        newArticle.setId(articleService.getAllArticle().);
-
         articleService.addNewArticle(newArticle);
         return "redirect:/index";
     }
@@ -87,13 +87,24 @@ public class ArticleController {
     }
 
     @PostMapping("/handleAddArticle")
-    public String handleAddArticle(@ModelAttribute("article") @Valid ArticleRequest article, BindingResult bindingResult){
+    public String handleAddArticle(@ModelAttribute("article") @Valid ArticleRequest article, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
-
+            model.addAttribute("article",new ArticleRequest());
+            model.addAttribute("authors",authorService.getAllAuthors());
+            model.addAttribute("categories",categoryService.getAllCategory());
             return "/new-article";
         }
-        System.out.println("article "+article);
         Article newArticle = new Article();
+        try{
+            String filenames="http://localhost:8080/images/"+ fileUploadService.uploadFile(article.getFile());
+            newArticle.setImageUrl(filenames);
+            //System.out.println("file is "+filenames);
+        }catch(Exception e){
+            newArticle.setImageUrl("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+            System.out.println("Erorr"+e.getMessage());
+        }
+        System.out.println("article "+article);
+
         newArticle.setTitle(article.getTitle());
         newArticle.setDescription(article.getDescription());
 

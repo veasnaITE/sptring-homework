@@ -20,12 +20,12 @@
         <img class="bd-placeholder-img rounded-circle" style="position: absolute; top:60%;" width="60" height="60" th:src="${article.author.pfUrl}" />
       </div>
       <h5 class="card-title mt-4" th:text="${article.author.name}">Card title</h5>
-      <span class="badge text-bg-info" th:text="${article.author.username}">Info</span>
-      <p class="card-text" th:text="${article.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <div>
-        <a th:href="@{/profile/{id}/{title}(id=${article.author.id}, title=${article.author.name})}" class="btn btn-primary">click me</a>
+      <a th:href="@{/profile/{id}/{title}(id=${article.author.id}, title=${article.author.name})}" style="text-decoration: none;" class="badge text-bg-info" th:text="${article.author.username}">Info</a>
 
-        <a th:href="@{/post/{postID}(postID=${article.id})}" class="btn btn-primary">View</a>
+      <span th:text="${article.category.content}" class="badge text-bg-info" >Info</span>
+      <p class="card-text" th:text="${article.description}"> card's content.</p>
+      <div>
+        <a th:href="@{/post/{postID}(postID=${article.id})}" class="btn btn-primary" >View</a>
         <a th:href="@{/edit/{editID}(editID=${article.id})}" class="btn btn-warning">Edit</a>
         <a th:href="@{/delete/{deleteID}(deleteID=${article.id})}" class="btn btn-danger">Delete</a>
       </div>

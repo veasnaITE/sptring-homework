@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class ArticleRequest {
     private String title;
     @NotEmpty(message = "description cannot be Empty")
     private String description;
-    private String ImageUrl;
+    private MultipartFile file;
 
     private int authorID;
 
