@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:reaplace="~{fragment/navbar::header}">
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,15 +9,15 @@
 <body>
 <main>
 <div>
-    <div  class="card col-12 col-md-4 col-lg-3" style="width: 25rem; margin:auto; padding: 20px;">
-        <img class="card-img-top" alt="...">
+    <div th:object="${authors}" class="card col-12 col-md-4 col-lg-3" style="width: 25rem; margin:auto; padding: 20px;">
+        <img th:src="*{pfUrl}" class="card-img-top" alt="...">
         <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p th:text="*{name}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
     </div>
 </div>
 <div>
-    <div class="card mt-2"  style="width: 28rem; position: relative;" th:each="article:${allArticles}" >
+    <div class="card mt-2"  style="width: 28rem; position: relative;" th:each="article:${allPostOfUser}" >
         <img  class="card-img-top" alt="...">
         <div class="card-body" >
             <div style="position: absolute; left: 22px; top:55%;">
