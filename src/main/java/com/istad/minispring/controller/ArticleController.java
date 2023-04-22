@@ -5,8 +5,10 @@ import com.istad.minispring.model.articleRequest.ArticleRequest;
 import com.istad.minispring.service.ArticleService;
 import com.istad.minispring.service.AuthorService;
 import com.istad.minispring.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,7 +87,11 @@ public class ArticleController {
     }
 
     @PostMapping("/handleAddArticle")
-    public String handleAddArticle(@ModelAttribute("article") ArticleRequest article){
+    public String handleAddArticle(@ModelAttribute("article") @Valid ArticleRequest article, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+
+            return "/new-article";
+        }
         System.out.println("article "+article);
         Article newArticle = new Article();
         newArticle.setTitle(article.getTitle());
