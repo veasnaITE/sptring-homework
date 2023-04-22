@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:reaplace="~{fragment/navbar::header}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+<div>
+    <div  class="card col-12 col-md-4 col-lg-3" style="width: 25rem; margin:auto; padding: 20px;">
+        <img class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="card mt-2"  style="width: 28rem; position: relative;" th:each="article:${allArticles}" >
+        <img  class="card-img-top" alt="...">
+        <div class="card-body" >
+            <div style="position: absolute; left: 22px; top:55%;">
+                <img class="bd-placeholder-img rounded-circle" style="position: absolute; top:60%;" width="60" height="60" th:src="${article.author.pfUrl}" />
+            </div>
+            <h5 class="card-title mt-4" th:text="${article.author.name}">Card title</h5>
+            <span class="badge text-bg-info" th:text="${article.author.username}">Info</span>
+            <p class="card-text" th:text="${article.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div>
+                <a th:href="@{/post/{postID}(postID=${article.id})}" class="btn btn-primary">View</a>
+                <a th:href="@{/edit/{editID}(editID=${article.id})}" class="btn btn-warning">Edit</a>
+                <a th:href="@{/delete/{deleteID}(deleteID=${article.id})}" class="btn btn-danger">Delete</a>
+            </div>
+</div>
+</main>
+<footer th:replace="~{fragment/navbar::pagefooter}"></footer>
+</body>
+</html>

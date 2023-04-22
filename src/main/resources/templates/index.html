@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/navbar::header}">
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+<nav th:replace="~{fragment/navbar::pagenavbar}"></nav>
+
+<main class="d-flex justify-content-between container ">
+  <section>
+    <a class="btn btn-primary" th:href="@{/add-new-article}" role="button">Add New Article</a>
+  <div class="card mt-2"  style="width: 28rem; position: relative;" th:each="article:${allArticles}" >
+     <img th:src="${article.imageUrl}" class="card-img-top" alt="...">
+    <div class="card-body" >
+      <div style="position: absolute; left: 22px; top:55%;">
+        <img class="bd-placeholder-img rounded-circle" style="position: absolute; top:60%;" width="60" height="60" th:src="${article.author.pfUrl}" />
+      </div>
+      <h5 class="card-title mt-4" th:text="${article.author.name}">Card title</h5>
+      <span class="badge text-bg-info" th:text="${article.author.username}">Info</span>
+      <p class="card-text" th:text="${article.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div>
+        <a th:href="@{/post/{postID}(postID=${article.id})}" class="btn btn-primary">View</a>
+        <a th:href="@{/edit/{editID}(editID=${article.id})}" class="btn btn-warning">Edit</a>
+        <a th:href="@{/delete/{deleteID}(deleteID=${article.id})}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section class="ps-2 m-2">
+    <div class="row g-0 bg-body-secondary position-relative">
+      <div class="col-md-6 mb-md-0 p-md-4">
+        <img src="https://cdn.pixabay.com/photo/2013/11/28/10/03/river-219972_960_720.jpg" class="w-100" alt="...">
+      </div>
+      <div class="col-md-6 p-4 ps-md-0" >
+        <h5 class="mt-0" >Columns with stretched link</h5>
+        <p>Another instance of placeholder content for this other custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.</p>
+      </div>
+      <div th:each="article:${allArticles}" >
+        <a href="#"  type="button" class="btn btn-outline-secondary" th:text="${article.category.content}" style="width: 100%; margin-bottom: 10px;">Secondary</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer th:replace="~{fragment/navbar::pagefooter}"></footer>
+</body>
+</html>
